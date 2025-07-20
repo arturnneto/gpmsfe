@@ -1,46 +1,27 @@
-# Getting Started with Create React App
+# GPMS - Frontend
+Este projeto em React e TypeScript serve como frontend para utilizar o aplicativo feito com Java 17 e Spring localizado no seguinte repositório: https://github.com/arturnneto/gpms. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto roda por padrão na porta 3000 do seu computador, porém esta porta pode mudar dependendo dos serviços que estiverem rodando no momento. 
 
-## Available Scripts
+Ao rodar os dois projetos em conjunto, é necessário atualizar as portas de requisição da API para a porta em que o servidor backend estiver rodando. Por padrão o projeto usa a porta 8080. 
 
-In the project directory, you can run:
+É necessário também atualizar a anotação @CrossOrigin na classe SaleOrderController para aceitar requisições CORS do servidor do frontend. 
+
+
+### Tecnologias utilizadas:
+- Node.JS
+- TypeScript
+- React.TS
+- TailwindCSS
+- PostCSS
+- Axios
+
+## Como rodar o projeto:
+
+No diretório do projeto, rode os seguintes comandos:
+
+### `npm install`
+Este comando instalará as dependências necessárias do projeto.
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Após as dependências instaladas, este comando vai startar o programa no seu computador.
