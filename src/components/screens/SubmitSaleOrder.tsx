@@ -13,15 +13,23 @@ const SubmitSaleOrder = () => {
     const [editIndex, setEditIndex] = useState<number | null>(null);
     const [responseOrder, setResponseOrder] = useState<saleOrder | null>(null);
 
+    const canSubmit = customerId !== null && customerId !== 0 && items.length > 0;
     const total = items.reduce((acc, item) => acc + item.quantity * item.price, 0);
 
     const addItem = () => {
-        if (!product || isNaN(quantity) || quantity <= 0 || isNaN(price) || price <= 0) {
-            alert("Por favor, preencha produto, quantidade e preço corretamente.");
+        setResponseOrder(null);
+
+        if (!product.trim() || !description.trim() || isNaN(quantity) || quantity <= 0 || isNaN(price) || price <= 0)  {
+            alert("Por favor, preencha todos os campos corretamente.");
             return;
         }
 
-        const newItem: saleOrderItem = { product, quantity, price, description };
+        const newItem: saleOrderItem = {
+            product: product.trim(),
+            quantity,
+            price,
+            description: description.trim()
+        };
 
         if (editIndex !== null) {
             const updatedItems = [...items];
@@ -49,12 +57,15 @@ const SubmitSaleOrder = () => {
         try {
             const response = await axios.post<saleOrder>('http://localhost:8080/v1/orders', newOrder);
             setResponseOrder(response.data);
+            setTimeout(() => setResponseOrder(null), 10000);
         } catch (error) {
             console.error("Erro ao enviar ordem de venda: ", error)
         }
     };
 
     const handleDeleteItem = (index: number) => {
+        setResponseOrder(null);
+
         setItems(items.filter((_, i) => i !== index));
         if (editIndex === index) {
             setEditIndex(null);
@@ -66,6 +77,8 @@ const SubmitSaleOrder = () => {
     };
 
     const handleEditItem = (index: number) => {
+        setResponseOrder(null);
+
         const item = items[index];
         setProduct(item.product);
         setQuantity(item.quantity);
@@ -84,6 +97,8 @@ const SubmitSaleOrder = () => {
                 <label className="block">Id do cliente:</label>
                 <input
                     type="number"
+                    inputMode="numeric"
+                    min="1"
                     placeholder="Digite o id do cliente"
                     value={customerId ?? ''}
                     onChange={(e) => setCustomerId(Number(e.target.value))}
@@ -97,10 +112,10 @@ const SubmitSaleOrder = () => {
                     <input placeholder="Insira o nome do produto" value={product} onChange={e => setProduct(e.target.value)} className="border p-1 mr-2" />
 
                     <label className="block mb-1 font-medium">Quantidade de produtos</label>
-                    <input type="number" min="1" placeholder="Insira a quantidade de produtos" value={quantity} onChange={e => setQuantity(Number(e.target.value))} className="border p-1 mr-2 w-64" />
+                    <input type="number" inputMode="numeric" min="1" placeholder="Insira a quantidade de produtos" value={quantity} onChange={e => setQuantity(Number(e.target.value))} className="border p-1 mr-2 w-64" />
 
                     <label className="block mb-1 font-medium">Preço do produto</label>
-                    <input type="number" min="1" placeholder="Insira o preço do produto" value={price} onChange={e => setPrice(Number(e.target.value))} className="border p-1 mr-2 w-64" />
+                    <input type="number" inputMode="numeric" min="1" placeholder="Insira o preço do produto" value={price} onChange={e => setPrice(Number(e.target.value))} className="border p-1 mr-2 w-64" />
 
                     <label className="block mb-1 font-medium">Descrição do produto</label>
                     <input placeholder="Insira a descrição do produto" value={description} onChange={e => setDescription(e.target.value)} className="border p-1 mr-2 w-64" /> <br/>
@@ -144,7 +159,22 @@ const SubmitSaleOrder = () => {
             </div>
 
             <div>
-                <button onClick={submitOrder} className="bg-green-600 text-white px-4 py-2 rounded">Enviar ordem de venda</button>
+                <button
+                    onClick={submitOrder}
+                    disabled={!canSubmit}
+                    title={
+                        !customerId || customerId === 0
+                            ? 'Por favor, insira o ID do cliente.'
+                            : items.length === 0
+                                ? 'Adicione pelo menos um item para enviar a ordem de venda.'
+                                : 'Enviar'
+                    }
+                    className={`px-4 py-2 rounded text-white ${
+                        canSubmit ? 'bg-green-600 hover:bg-green-700 cursor-pointer' : 'bg-green-300 cursor-not-allowed'
+                    }`}
+                >
+                    Enviar ordem de venda
+                </button>
                 {responseOrder && (
                     <h3 className="font-bold text-lime-600">Ordem cadastrada com sucesso!</h3>
                 )}
