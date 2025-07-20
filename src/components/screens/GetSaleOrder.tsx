@@ -30,7 +30,7 @@ const GetSaleOrder: React.FC = () => {
     }
 
     return (
-        <div className="p-4 space-y-4 max-w-xl">
+        <div className="p-4 space-y-4 max-w-6xl">
             <div className="flex space-x-2">
                 <input
                     type="text"
@@ -57,13 +57,14 @@ const GetSaleOrder: React.FC = () => {
 
                         <div className="mt-4">
                             <h3 className="text-md font-bold mb-2">Itens da ordem de venda:</h3>
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-4 gap-4">
                             {order.itemList.map((item, index) => (
                                 <div key={index} className="border p-2 rounded bg-white shadow mt-2">
-                                    <h4 className="font-semibold text-blue-700 break-words whitespace-normal">{item.product}</h4>
+                                    <h4 className="font-semibold text-blue-700 break-words whitespace-normal capitalize">{item.product}</h4>
                                     <p><strong>Quantidade:</strong> {item.quantity}</p>
-                                    <p><strong>Preço:</strong> R$ {item.price.toFixed(2)}</p>
-                                    <p className="text-sm text-gray-600 break-words whitespace-normal">{item.description}</p>
+                                    <p><strong>Valor:</strong> R$ {item.price.toFixed(2)}</p>
+                                    <p><strong>Total:</strong> R$ {(item.price * item.quantity).toFixed(2)}</p>
+                                    <p className="text-sm text-gray-600 break-words whitespace-normal capitalize">{item.description}</p>
                                 </div>
                             ))}
                         </div>
