@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import { saleOrder, saleOrderResponse, pagination } from "../../types/types";
+import { saleOrder, SaleOrderResponse, pagination } from "../../types/types";
 
 
 const ListSaleOrders: React.FC = () => {
@@ -11,7 +11,7 @@ const ListSaleOrders: React.FC = () => {
 
     const fetchOrders = (pageNumber: number) => {
         setLoading(true);
-        axios.get<saleOrderResponse>(
+        axios.get<SaleOrderResponse>(
             `http://localhost:8080/v1/orders?page=${pageNumber}&size=9`
         )
             .then(response => {

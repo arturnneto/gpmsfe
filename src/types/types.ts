@@ -5,7 +5,7 @@ export type pagination = {
     totalPages: number;
 };
 
-export type saleOrderResponse = {
+export type SaleOrderResponse = {
     data: saleOrder[];
     pagination: pagination;
 };
