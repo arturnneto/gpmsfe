@@ -39,7 +39,10 @@ const GetSaleOrder: React.FC = () => {
                     <h2><strong>Ordem de venda:</strong> {orderIdInput}</h2>
                     <p><strong>ID do cliente:</strong> {order.customerId}</p>
                     {order.total !== undefined && (
-                        <p><strong>Total do pedido:</strong> R$ {order.total.toFixed(2)}</p>
+                        <p><strong>Total do pedido:</strong> R$ {order.total.toLocaleString("pt-BR", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                        })}</p>
                     )}
 
                     <div className="mt-4">
@@ -50,8 +53,14 @@ const GetSaleOrder: React.FC = () => {
                                      className="border p-2 rounded bg-white shadow mt-2">
                                     <h4 className="font-semibold text-blue-700 break-words whitespace-normal capitalize">{item.product}</h4>
                                     <p><strong>Quantidade:</strong> {item.quantity}</p>
-                                    <p><strong>Valor:</strong> R$ {item.price.toFixed(2)}</p>
-                                    <p><strong>Total:</strong> R$ {(item.price * item.quantity).toFixed(2)}</p>
+                                    <p><strong>Valor:</strong> R$ {item.price.toLocaleString("pt-BR", {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                    })}</p>
+                                    <p><strong>Total:</strong> R$ {(item.price * item.quantity).toLocaleString("pt-BR", {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                    })}</p>
                                     <p className="text-sm text-gray-600 break-words whitespace-normal capitalize">{item.description}</p>
                                 </div>
                             ))}

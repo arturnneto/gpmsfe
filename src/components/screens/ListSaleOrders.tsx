@@ -58,15 +58,24 @@ const ListSaleOrders: React.FC = () => {
                             <strong>Id do cliente: </strong> {order.customerId}{" "}
                         </p>
                         <p>
-                            <strong>Total: </strong> R$ {order.total?.toFixed(2)}{" "}
+                            <strong>Total: </strong> R$ {order.total?.toLocaleString("pt-BR", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                        })}{" "}
                         </p>
                         <div className="mt-2">
                             <h3 className="font-semibold mb-1">Itens:</h3>
                             <ul className="list-disc list-inside max-h-32 overflow-y-auto text-sm break-words whitespace-normal ">
                                 {order.itemList.map((item, i) => (
                                     <li key={i} className="capitalize">
-                                        {item.quantity}x {item.product} - R${item.price.toFixed(2)} - Total: R${" "}
-                                        {(item.price * item.quantity).toFixed(2)}
+                                        {item.quantity}x {item.product} - R${item.price.toLocaleString("pt-BR", {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                    })} - Total: R${" "}
+                                        {(item.price * item.quantity).toLocaleString("pt-BR", {
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2,
+                                        })}
                                         <ul className="ml-6 list-disc text-sm text-gray-600 capitalize">
                                             <li>{item.description}</li>
                                         </ul>
