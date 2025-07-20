@@ -35,7 +35,7 @@ const GetSaleOrder: React.FC = () => {
             {error && <p className="text-red-500">{error}</p>}
 
             {order && (
-                <div className="border p-4 rounded bg-gray-100">
+                <div className="border p-4 rounded bg-white">
                     <h2><strong>Ordem de venda:</strong> {orderIdInput}</h2>
                     <p><strong>ID do cliente:</strong> {order.customerId}</p>
                     {order.total !== undefined && (
