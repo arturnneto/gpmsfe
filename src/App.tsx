@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className="flex h-screen w-full bg-cover bg-custom-bg">
-        <div className="flex h-screen  bg-cover bg-custom-bg">
+        <div className="flex h-screen">
             <Sidebar screenRender={setScreen} />
         </div>
 
