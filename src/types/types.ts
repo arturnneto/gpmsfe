@@ -1,7 +1,3 @@
-export type saleOrderSubmissionForm = {
-
-}
-
 export type pagination = {
     page: number;
     pageSize: number;
